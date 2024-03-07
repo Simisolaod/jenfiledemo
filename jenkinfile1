@@ -1,0 +1,30 @@
+@Library('my-shared-library') _
+pipeline{
+    tools{
+        maven 'mymaven'
+    }
+    agent any
+    
+    stages{
+        stage('clone repo')
+        {
+            steps{
+                cloneRepo('https://github.com/Sonal0409/DevOpsCodeDemo.git')
+            }
+        }
+        stage('Compile')
+        {
+            steps{
+                build('Clean')
+                build('Compile')
+            }
+        }
+        stage('Test')
+        {
+            steps{
+                build('Clean')
+                build('Test')
+            }
+        }
+    }
+}
